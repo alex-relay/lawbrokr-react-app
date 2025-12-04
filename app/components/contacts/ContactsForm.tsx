@@ -12,10 +12,11 @@ import {
 
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 
-import "./contacts.css";
 import { getIsURL, getIsValidNumber, transformFormData } from "./utils";
 import { ContactsFormInput } from "./types";
 import { Contact } from "../../api/api";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const GenericTextInputWithErrorMessage = ({
   field,
@@ -34,30 +35,34 @@ const GenericTextInputWithErrorMessage = ({
   </div>
 );
 
+const formDefaultValues = {
+  company: "",
+  country: "",
+  city: "",
+  state: "",
+  employees: "",
+  zipCode: "",
+  website: "",
+  salesRep: "",
+  purchased: false,
+  lastContacted: undefined,
+  revenue: "",
+};
+
 const ContactsForm = ({
   onContactsDataChange,
 }: {
   onContactsDataChange: (data: Contact[]) => void;
 }) => {
+  
+  const router = useRouter()
   const {
     handleSubmit,
     control,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm<ContactsFormInput>({
-    defaultValues: {
-      company: "",
-      country: "",
-      city: "",
-      state: "",
-      employees: "",
-      zipCode: "",
-      website: "",
-      salesRep: "",
-      purchased: false,
-      lastContacted: new Date(),
-      revenue: "",
-    },
+    defaultValues: formDefaultValues,
   });
 
   const onSubmit: SubmitHandler<ContactsFormInput> = (data) => {
@@ -65,11 +70,12 @@ const ContactsForm = ({
     const parsedCurrentTableData = JSON.parse(currentTableData ?? "");
 
     const transformedFormData = transformFormData(data);
-
     const updatedTable = [...parsedCurrentTableData, transformedFormData];
 
     sessionStorage.setItem("contactsData", JSON.stringify(updatedTable));
-    onContactsDataChange(updatedTable)
+    onContactsDataChange(updatedTable);
+
+    router.push("/")
 
     return updatedTable;
   };
@@ -78,8 +84,16 @@ const ContactsForm = ({
     console.log("Validation Errors:", errors);
   };
 
+  useEffect(() => {
+    reset(formDefaultValues);
+  }, [isSubmitSuccessful]);
+
   return (
-    <div>
+    <div className="flex flex-col gap-4">
+      <h1>
+        {" "}
+        <b>Table Entry Form</b>{" "}
+      </h1>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <div className="flex flex-col gap-2">
           <div className="flex w-full flex-wrap gap-4">
@@ -157,14 +171,33 @@ const ContactsForm = ({
                   required: "Number of employees is required",
                   validate: getIsValidNumber,
                 }}
-                render={({ field }) => (
-                  <GenericTextInputWithErrorMessage
-                    field={field}
-                    placeholder="e.g. 2"
-                    color={errors.employees ? "failure" : "white"}
-                    errorMessage={errors.employees?.message}
-                  />
-                )}
+                render={({ field }) => {
+                  const { onChange } = field;
+                  return (
+                    <>
+                      <TextInput
+                        {...field}
+                        color={errors.employees ? "failure" : "white"}
+                        placeholder="e.g. 43"
+                        inputMode="numeric"
+                        value={field.value ?? ""}
+                        onChange={(event) => {
+                          const val = event.target.value;
+                          if (isNaN(Number(val))) {
+                            onChange(null);
+                          } else {
+                            onChange(Number(val));
+                          }
+                        }}
+                      />
+                      {errors.employees && (
+                        <HelperText color="failure">
+                          {errors.employees?.message}
+                        </HelperText>
+                      )}
+                    </>
+                  );
+                }}
               />
             </div>
             <div>
@@ -177,7 +210,7 @@ const ContactsForm = ({
                 name="zipCode"
                 control={control}
                 rules={{
-                  required: true,
+                  required: "Zip code must be in a valid format",
                   pattern: {
                     value: /^[0-9]{5}(?:-[0-9]{4})?$/,
                     message: "Zip code must be in a valid format",
@@ -254,28 +287,29 @@ const ContactsForm = ({
                 name="revenue"
                 control={control}
                 rules={{
-                  required: true,
+                  required: "Revenue number is required",
                   validate: getIsValidNumber,
                 }}
                 render={({ field }) => {
+                  const { onChange } = field;
                   return (
                     <>
                       <TextInput
                         {...field}
-                        color="white"
+                        color={errors.revenue ? "failure" : "white"}
                         placeholder="e.g. 43"
                         inputMode="numeric"
                         value={field.value ?? ""}
                         onChange={(event) => {
                           const val = event.target.value;
                           if (isNaN(Number(val))) {
-                            field.onChange(null);
+                            onChange(null);
                           } else {
-                            field.onChange(val);
+                            onChange(Number(val));
                           }
                         }}
                       />
-                      {errors.revenue && (
+                      {errors.revenue?.message && (
                         <HelperText color="failure">
                           {errors.revenue.message}
                         </HelperText>
@@ -294,7 +328,7 @@ const ContactsForm = ({
               <Controller
                 name="city"
                 control={control}
-                rules={{ required: true, maxLength: 30 }}
+                rules={{ required: "City is required", maxLength: 30 }}
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
@@ -314,18 +348,25 @@ const ContactsForm = ({
               <Controller
                 name="lastContacted"
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: "Date is required" }}
                 render={({ field }) => (
-                  <div>
+                  <>
                     <Datepicker
                       value={
                         field.value instanceof Date ? field.value : undefined
                       }
                       color="white"
-                      onChange={(date: Date | null) => field.onChange(date)}
+                      onChange={(date: Date | null) =>
+                        field.onChange(date?.toLocaleDateString("en-CA"))
+                      }
                       onBlur={field.onBlur}
                     />
-                  </div>
+                    {errors.lastContacted && (
+                      <HelperText color="failure">
+                        {errors.lastContacted.message}
+                      </HelperText>
+                    )}
+                  </>
                 )}
               />
             </div>
@@ -338,13 +379,19 @@ const ContactsForm = ({
               <Controller
                 name="purchased"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => (
-                  <ToggleSwitch
-                    checked={!!field.value}
-                    onChange={(checked) => field.onChange(checked)}
-                    onBlur={field.onBlur}
-                  />
+                  <>
+                    <ToggleSwitch
+                      checked={!!field.value}
+                      onChange={(checked) => field.onChange(checked)}
+                      onBlur={field.onBlur}
+                    />
+                    {errors.purchased && (
+                      <HelperText color="failure">
+                        {errors.purchased.message}
+                      </HelperText>
+                    )}
+                  </>
                 )}
               />
             </div>

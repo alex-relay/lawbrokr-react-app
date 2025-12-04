@@ -2,38 +2,14 @@
 
 import ContactsForm from "./ContactsForm";
 import ContactsTable from "./ContactsTable";
-import { useGetContactList } from "../../api/api";
-import { useContext, useEffect, useState } from "react";
-import { ContactsContext } from "../../ContactsContext";
+import { useContactsContext } from "../../ContactsContext";
 
 const ContactsContainer = () => {
-  // const { data: contactsData = [], isLoading, isError } = useGetContactList();
-
-  const { isLoading, isError } = useContext(ContactsContext) || {
-    isLoading: false,
-    isError: false,
-  };
-
-  const [contactsData, setContactsData] = useState<any[]>([]);
-
-  useEffect(() => {
-    const savedData = sessionStorage.getItem("contactsData");
-    if (savedData) {
-      setContactsData(JSON.parse(savedData));
-    }
-  }, []);
+  const { updateContacts } = useContactsContext();
 
   return (
-    <div className="flex flex-col gap-2">
-      {contactsData?.length ? (
-        <ContactsForm onContactsDataChange={setContactsData} />
-      ) : null}
-
-      <ContactsTable
-        contacts={contactsData}
-        isLoading={isLoading}
-        isError={isError}
-      />
+    <div className="rounded-sm border border-solid p-4">
+      <ContactsForm onContactsDataChange={updateContacts} />
     </div>
   );
 };
