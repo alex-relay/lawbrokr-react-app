@@ -19,29 +19,31 @@ const CryptoPrice = () => {
   }
 
   return (
-    <Chart
-      type="line"
-      options={{
-        chart: {
-          id: "basic-line",
-        },
-        xaxis: {
-          categories:
-            priceData?.map((data) => new Date(data[0]).toLocaleDateString()) ||
-            [],
-          tickAmount: 10,
-          decimalsInFloat: 1,
-        },
-        title: { text: "BTC Price Over 30 days" },
-      }}
-      series={[
-        {
-          name: "BTC Price",
-          data: priceData?.map((data) => Number(data[4])) || [],
-        },
-      ]}
-      width={"100%"}
-    />
+    <div className="flex-1 rounded-sm border border-solid p-4">
+      <Chart
+        type="line"
+        options={{
+          chart: {
+            id: "basic-line",
+          },
+          xaxis: {
+            categories:
+              priceData?.map((data) => new Date(data[0]).toLocaleDateString()) ||
+              [],
+            tickAmount: 10,
+            decimalsInFloat: 1,
+          },
+          title: { text: "BTC Price Over 30 days" },
+        }}
+        series={[
+          {
+            name: "BTC Price",
+            data: priceData?.map((data) => Number(data[4])) || [],
+          },
+        ]}
+        width={"100%"}
+      />
+    </div>
   );
 };
 
