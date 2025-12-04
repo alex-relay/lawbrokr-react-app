@@ -1,34 +1,62 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Contact, useGetContactList } from "./api/api";
 
 type ContactsContextType = {
   contacts: Contact[];
   isLoading: boolean;
   isError: boolean;
+  updateContacts: (data: Contact[]) => void;
 };
 
-export const ContactsContext = createContext<ContactsContextType | null>(null);
+const ContactsContext = createContext<ContactsContextType | null>(null);
+
+export const useContactsContext = () => {
+  const currentNavContext = useContext(ContactsContext);
+
+  if (!currentNavContext) {
+    throw new Error(
+      "useContactsContext has to be used within <NavContext.Provider>",
+    );
+  }
+
+  return currentNavContext;
+};
 
 const ContactsContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const { data: contactsData = [], isLoading, isError } = useGetContactList();
+  const { data: apiData, isLoading: apiLoading, isError } = useGetContactList();
 
+  const [contacts, setContacts] = useState<Contact[]>([]);
   useEffect(() => {
-    if (typeof window !== "undefined" && "sessionStorage" in window) {
-      const savedData = sessionStorage.getItem("contactsData");
+    const currentContacts = sessionStorage.getItem("contactsData");
 
-      if (!JSON.parse(savedData ?? "")) {
-        sessionStorage.setItem("contactsData", JSON.stringify(contactsData));
-      }
+    if (contacts.length > 0) return;
+
+    if (!!currentContacts) {
+      const parsedCurrentContacts = JSON.parse(currentContacts ?? "[]");
+      setContacts(parsedCurrentContacts);
+    } else if (!!apiData?.length) {
+      sessionStorage.setItem("contactsData", JSON.stringify(apiData));
+      setContacts(apiData);
     }
-  }, [contactsData]);
+  }, [contacts, apiData]);
+
+  const updateContacts = (newContacts: Contact[]) => {
+    setContacts(newContacts);
+    sessionStorage.setItem("contactsData", JSON.stringify(newContacts));
+  };
 
   return (
     <ContactsContext.Provider
-      value={{ contacts: contactsData, isLoading, isError }}
+      value={{
+        contacts,
+        updateContacts,
+        isLoading: apiLoading,
+        isError,
+      }}
     >
       {children}
     </ContactsContext.Provider>
