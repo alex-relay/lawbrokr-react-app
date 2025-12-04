@@ -1,10 +1,9 @@
 "use client";
 
 import ContactsForm from "./ContactsForm";
-import ContactsTable from "./ContactsTable";
 import { useContactsContext } from "../../ContactsContext";
 
-const ContactsContainer = () => {
+const ContactsFormContainer = () => {
   const { updateContacts } = useContactsContext();
 
   return (
@@ -14,4 +13,4 @@ const ContactsContainer = () => {
   );
 };
 
-export default ContactsContainer;
+export default ContactsFormContainer;

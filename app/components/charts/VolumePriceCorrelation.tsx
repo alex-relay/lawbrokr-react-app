@@ -17,7 +17,6 @@ const VolumePriceCorrelation = () => {
   const {
     data: priceData,
     isLoading,
-    isError,
   } = useGetBTCPriceWithInterval(["scatter-plot", "180d"], undefined, "180");
 
   const percentDifferencesBetweenPrices: VolumePriceCorrelationDataPoint[] =

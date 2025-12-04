@@ -28,13 +28,13 @@ A robust, responsive contact management application built with **Next.js 14**, *
 ## 🛠️ Installation & Setup
 
 1. **Clone the repository:**
-   \`\`\`bash
+   \`\`\`
    git clone https://github.com/alex-relay/lawbrokr-react-app.git
    cd lawbrokr-react-app
    \`\`\`
 
 2. **Install dependencies:**
-   \`\`\`bash
+   \`\`\`
    npm install
 
    # or
@@ -43,7 +43,7 @@ A robust, responsive contact management application built with **Next.js 14**, *
    \`\`\`
 
 3. **Run the development server:**
-   \`\`\`bash
+   \`\`\`
    npm run dev
    \`\`\`
 

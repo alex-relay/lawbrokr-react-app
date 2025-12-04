@@ -10,7 +10,12 @@ import {
   ToggleSwitch,
 } from "flowbite-react";
 
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import {
+  SubmitHandler,
+  useForm,
+  Controller,
+  FieldErrors,
+} from "react-hook-form";
 
 import { getIsURL, getIsValidNumber, transformFormData } from "./utils";
 import { ContactsFormInput } from "./types";
@@ -54,8 +59,7 @@ const ContactsForm = ({
 }: {
   onContactsDataChange: (data: Contact[]) => void;
 }) => {
-  
-  const router = useRouter()
+  const router = useRouter();
   const {
     handleSubmit,
     control,
@@ -75,18 +79,18 @@ const ContactsForm = ({
     sessionStorage.setItem("contactsData", JSON.stringify(updatedTable));
     onContactsDataChange(updatedTable);
 
-    router.push("/")
+    router.push("/");
 
     return updatedTable;
   };
 
-  const onError = (errors: any) => {
+  const onError = (errors: FieldErrors<ContactsFormInput>) => {
     console.log("Validation Errors:", errors);
   };
 
   useEffect(() => {
     reset(formDefaultValues);
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <div className="flex flex-col gap-4">

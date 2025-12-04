@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
-import { Contact, useGetContactList } from "../../api/api";
+import { Contact } from "../../api/api";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/navigation";
 
@@ -21,12 +21,10 @@ const getColumnDefs = (data: Contact[]) => {
 const ContactsTable = ({
   contacts,
   isLoading,
-  isError,
   title = "Contacts",
 }: {
   contacts: Contact[];
   isLoading: boolean;
-  isError: boolean;
   title?: string;
 }) => {
   const router = useRouter();

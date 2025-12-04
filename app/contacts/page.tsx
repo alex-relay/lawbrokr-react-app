@@ -1,10 +1,10 @@
-import ContactsContainer from "../components/contacts/ContactsContainer";
+import ContactsFormContainer from "../components/contacts/ContactsFormContainer";
 
 const ContactsPage = () => {
   return (
     <main className="min-h-screen items-center justify-center bg-white px-4 py-10">
       <div>
-        <ContactsContainer />
+        <ContactsFormContainer />
       </div>
     </main>
   );
