@@ -3,13 +3,16 @@
 import ContactsForm from "./ContactsForm";
 import ContactsTable from "./ContactsTable";
 import { useGetContactList } from "../../api/api";
-import { useEffect, useState } from "react";
-import { useNavContext } from "../../ContactsContext";
+import { useContext, useEffect, useState } from "react";
+import { ContactsContext } from "../../ContactsContext";
 
 const ContactsContainer = () => {
   // const { data: contactsData = [], isLoading, isError } = useGetContactList();
 
-  const { isLoading, isError } = useNavContext();
+  const { isLoading, isError } = useContext(ContactsContext) || {
+    isLoading: false,
+    isError: false,
+  };
 
   const [contactsData, setContactsData] = useState<any[]>([]);
 
