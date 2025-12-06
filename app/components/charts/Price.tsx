@@ -19,21 +19,52 @@ const CryptoPrice = () => {
   }
 
   return (
-    <div className="flex-1 rounded-sm border border-solid p-4">
+    <div className="flex-1 rounded-sm border border-1 border-solid border-[var(--color-my-brand-primary)]/50 p-4">
       <Chart
         type="line"
         options={{
+          colors: ["#250D53"],
           chart: {
             id: "basic-line",
           },
           xaxis: {
             categories:
-              priceData?.map((data) => new Date(data[0]).toLocaleDateString()) ||
-              [],
+              priceData?.map((data) =>
+                new Date(data[0]).toLocaleDateString(),
+              ) || [],
             tickAmount: 10,
             decimalsInFloat: 1,
+            labels: {
+              style: {
+                colors: "#250D53",
+              },
+            },
+            title: {
+              text: "Volume",
+              style: {
+                color: "#250D53",
+              },
+            },
           },
-          title: { text: "BTC Price Over 30 days" },
+          yaxis: {
+            title: {
+              text: "Price",
+              style: {
+                color: "#250D53",
+              },
+            },
+            labels: {
+              style: {
+                colors: "#250D53",
+              },
+            },
+          },
+          title: {
+            text: "BTC Price Over 30 days",
+            style: {
+              color: "#250D53",
+            },
+          },
         }}
         series={[
           {

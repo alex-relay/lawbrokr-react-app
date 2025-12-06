@@ -7,7 +7,7 @@ const ContactsFormContainer = () => {
   const { updateContacts } = useContactsContext();
 
   return (
-    <div className="rounded-sm border border-solid p-4">
+    <div className="rounded-sm border border-solid p-4 border-[var(--color-my-brand-primary)]/50 ">
       <ContactsForm onContactsDataChange={updateContacts} />
     </div>
   );

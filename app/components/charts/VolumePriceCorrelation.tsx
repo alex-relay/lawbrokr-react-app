@@ -14,10 +14,11 @@ const calculatePercentDifference = (high: number, low: number) => {
 };
 
 const VolumePriceCorrelation = () => {
-  const {
-    data: priceData,
-    isLoading,
-  } = useGetBTCPriceWithInterval(["scatter-plot", "180d"], undefined, "180");
+  const { data: priceData, isLoading } = useGetBTCPriceWithInterval(
+    ["scatter-plot", "180d"],
+    undefined,
+    "180",
+  );
 
   const percentDifferencesBetweenPrices: VolumePriceCorrelationDataPoint[] =
     useMemo(() => {
@@ -40,10 +41,11 @@ const VolumePriceCorrelation = () => {
   }
 
   return (
-    <div className="flex-1 rounded-sm border border-solid p-4">
+    <div className="flex-1 rounded-sm border border-1 border-solid border-[var(--color-my-brand-primary)]/50 p-4">
       <Chart
         type="scatter"
         options={{
+          colors: ["#250D53"],
           chart: {
             id: "basic-scatter",
           },
@@ -54,6 +56,14 @@ const VolumePriceCorrelation = () => {
             tickAmount: 18,
             title: {
               text: "Volume",
+              style: {
+                color: "#250D53",
+              },
+            },
+            labels: {
+              style: {
+                colors: ["#250D53"],
+              },
             },
           },
           yaxis: {
@@ -61,9 +71,22 @@ const VolumePriceCorrelation = () => {
             stepSize: 2,
             title: {
               text: "Price Change %",
+              style: {
+                color: "#250D53",
+              },
+            },
+            labels: {
+              style: {
+                colors: ["#250D53"],
+              },
             },
           },
-          title: { text: "Volume-Volatility Correlation" },
+          title: {
+            text: "Volume-Volatility Correlation",
+            style: {
+              color: "#250D53",
+            },
+          },
         }}
         series={[
           {

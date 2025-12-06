@@ -108,7 +108,7 @@ const ContactsForm = ({
       const filteredCurrentTable = parsedCurrentTableData.filter(
         (contact) => contact.id !== existingContact?.id,
       );
-      updatedTable = [...filteredCurrentTable, existingContact];
+      updatedTable = [...filteredCurrentTable, transformedFormData];
     } else {
       updatedTable = [...parsedCurrentTableData, transformedFormData];
     }
@@ -131,7 +131,7 @@ const ContactsForm = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <h1>
+      <h1 className="text-[var(--color-my-brand-primary)]">
         {" "}
         <b>Table Entry Form</b>{" "}
       </h1>
@@ -140,7 +140,11 @@ const ContactsForm = ({
           <div className="flex w-full flex-wrap gap-4">
             <div>
               <div>
-                <Label color="grey" htmlFor="company">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="primary"
+                  htmlFor="company"
+                >
                   Company
                 </Label>
               </div>
@@ -160,7 +164,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label color="grey" htmlFor="country">
+                <Label
+                  color="grey"
+                  className="text-[var(--color-my-brand-primary)]"
+                  htmlFor="country"
+                >
                   Country
                 </Label>
               </div>
@@ -180,7 +188,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label htmlFor="state" color="grey">
+                <Label
+                  htmlFor="state"
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                >
                   State
                 </Label>
               </div>
@@ -201,7 +213,11 @@ const ContactsForm = ({
 
             <div>
               <div>
-                <Label htmlFor="employees" color="grey">
+                <Label
+                  htmlFor="employees"
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                >
                   Employees
                 </Label>
               </div>
@@ -243,7 +259,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label htmlFor="zipCode" color="grey">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  htmlFor="zipCode"
+                  color="grey"
+                >
                   Zip Code
                 </Label>
               </div>
@@ -269,7 +289,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label htmlFor="website" color="grey">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  htmlFor="website"
+                  color="grey"
+                >
                   Website
                 </Label>
               </div>
@@ -293,7 +317,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label color="grey" htmlFor="salesRep">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                  htmlFor="salesRep"
+                >
                   Sales Rep
                 </Label>
               </div>
@@ -320,7 +348,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label color="grey" htmlFor="revenue">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                  htmlFor="revenue"
+                >
                   Revenue
                 </Label>
               </div>
@@ -362,7 +394,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label color="grey" htmlFor="city">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                  htmlFor="city"
+                >
                   City
                 </Label>
               </div>
@@ -382,7 +418,11 @@ const ContactsForm = ({
             </div>
             <div>
               <div>
-                <Label color="grey" htmlFor="lastContacted">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                  htmlFor="lastContacted"
+                >
                   Last Contacted
                 </Label>
               </div>
@@ -413,7 +453,11 @@ const ContactsForm = ({
             </div>
             <div className="flex flex-col gap-2">
               <div>
-                <Label color="grey" htmlFor="purchased">
+                <Label
+                  className="text-[var(--color-my-brand-primary)]"
+                  color="grey"
+                  htmlFor="purchased"
+                >
                   Purchased
                 </Label>
               </div>
@@ -438,7 +482,13 @@ const ContactsForm = ({
             </div>
           </div>
           <div className="flex justify-center">
-            <Button type="submit"> Add Entry </Button>
+            <Button
+              className="dark:bg-my-brand-primary hover:text-my-brand-primary cursor-pointer text-white hover:dark:bg-gray-200"
+              type="submit"
+            >
+              {" "}
+              Add Entry{" "}
+            </Button>
           </div>
         </div>
       </form>
