@@ -3,3 +3,8 @@
 @source "../.flowbite-react/class-list.json";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-my-brand-primary: #250D53;
+  --color-my-brand-secondary: #F8F7F8;
+}
