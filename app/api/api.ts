@@ -18,7 +18,7 @@ type KlineData = [
   string,
 ];
 
-type Contact = {
+export type Contact = {
   company: string;
   country: string;
   state: string;
@@ -31,6 +31,7 @@ type Contact = {
   last_contacted: string;
   purchased: boolean;
   notes: string;
+  id: number;
 };
 
 const getContactList = async (): Promise<Contact[]> => {
@@ -46,7 +47,14 @@ const getContactList = async (): Promise<Contact[]> => {
   }
 
   const contacts = await data.json();
-  return contacts.data;
+  const contactsData: Contact[] = contacts.data ?? [];
+
+  const contactsWithId = contactsData.map((contact: Contact, idx) => ({
+    ...contact,
+    id: idx + 1,
+  }));
+
+  return contactsWithId;
 };
 
 const useGetContactList = () => {
@@ -90,4 +98,4 @@ const useGetBTCPriceWithInterval = (
   });
 };
 
-export { useGetBTCPriceWithInterval, useGetContactList, Contact };
+export { useGetBTCPriceWithInterval, useGetContactList };

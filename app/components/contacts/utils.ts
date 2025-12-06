@@ -18,12 +18,13 @@ const getIsValidNumber = (data: string) => {
   return number >= 0 || "Number must not be negative";
 };
 
-const transformFormData = (formData: ContactsFormInput) => {
+const transformFormData = (formData: ContactsFormInput, id: number) => {
   if (!formData) {
     return;
   }
 
   const data = {} as Record<string, unknown>;
+  data["id"] = id
 
   Object.entries(formData).forEach(([key, value]) => {
     if (key === "zipCode" && value !== null && typeof value === "string") {

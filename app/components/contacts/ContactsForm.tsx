@@ -22,6 +22,7 @@ import { ContactsFormInput } from "./types";
 import { Contact } from "../../api/api";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useContactsContext } from "@/app/ContactsContext";
 
 const GenericTextInputWithErrorMessage = ({
   field,
@@ -39,6 +40,25 @@ const GenericTextInputWithErrorMessage = ({
     {!!errorMessage && <HelperText color="failure">{errorMessage}</HelperText>}
   </div>
 );
+
+const getExistingContact = (contacts: Contact[], data?: Contact) => {
+  if (!data) {
+    return null;
+  }
+  const formValues = Object.values(data);
+  const existingContact = contacts.find((contact) => {
+    const contactValues = Object.entries(contact);
+    const commonalities = contactValues.filter(
+      ([key, value]) =>
+        !["last-contacted", "notes"].includes(key) &&
+        formValues.includes(value),
+    );
+
+    return commonalities.length >= 5;
+  });
+
+  return existingContact;
+};
 
 const formDefaultValues = {
   company: "",
@@ -59,6 +79,7 @@ const ContactsForm = ({
 }: {
   onContactsDataChange: (data: Contact[]) => void;
 }) => {
+  const { contacts } = useContactsContext();
   const router = useRouter();
   const {
     handleSubmit,
@@ -71,10 +92,26 @@ const ContactsForm = ({
 
   const onSubmit: SubmitHandler<ContactsFormInput> = (data) => {
     const currentTableData = sessionStorage.getItem("contactsData");
-    const parsedCurrentTableData = JSON.parse(currentTableData ?? "");
+    const parsedCurrentTableData: Contact[] = JSON.parse(
+      currentTableData ?? "",
+    );
 
-    const transformedFormData = transformFormData(data);
-    const updatedTable = [...parsedCurrentTableData, transformedFormData];
+    const id = contacts?.length + 1;
+
+    const transformedFormData = transformFormData(data, id) as Contact;
+
+    const existingContact = getExistingContact(contacts, transformedFormData);
+
+    let updatedTable;
+
+    if (existingContact) {
+      const filteredCurrentTable = parsedCurrentTableData.filter(
+        (contact) => contact.id !== existingContact?.id,
+      );
+      updatedTable = [...filteredCurrentTable, existingContact];
+    } else {
+      updatedTable = [...parsedCurrentTableData, transformedFormData];
+    }
 
     sessionStorage.setItem("contactsData", JSON.stringify(updatedTable));
     onContactsDataChange(updatedTable);
