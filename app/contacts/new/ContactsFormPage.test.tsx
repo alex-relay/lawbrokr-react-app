@@ -158,7 +158,7 @@ describe("Home page", () => {
       website: "https://www.tsn.ca",
       sales_rep: "Linda",
       purchased: false,
-      last_contacted: "2025-12-08",
+      last_contacted: new Date().toLocaleDateString(),
       revenue: 67,
     };
 
@@ -249,7 +249,7 @@ describe("Home page", () => {
       website: "https://www.tsn.ca",
       sales_rep: "Linda",
       purchased: false,
-      last_contacted: "2025-12-08",
+      last_contacted: new Date().toLocaleDateString(),
       revenue: 28,
     };
 
@@ -258,7 +258,7 @@ describe("Home page", () => {
       newEntryObject,
     ]);
 
-    expect(await setItemSpy).toHaveBeenCalledWith(
+    expect(await setItemSpy).toHaveBeenLastCalledWith(
       "contactsData",
       updatedContactsList,
     );

@@ -40,7 +40,7 @@ const CryptoPrice = () => {
               },
             },
             title: {
-              text: "Volume",
+              text: "Date",
               style: {
                 color: "#250D53",
               },
