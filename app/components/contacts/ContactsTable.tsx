@@ -54,7 +54,7 @@ const ContactsTable = ({
 
   return (
     <ThemeProvider theme={customTheme}>
-      <div className="flex h-100 w-full flex-col gap-4">
+      <div className="flex h-100 w-full flex-col gap-4" data-testid="contacts-table">
         <div className="flex justify-between">
           <h1 className="text-[var(--color-my-brand-primary)]">
             {" "}
@@ -64,7 +64,9 @@ const ContactsTable = ({
             size="sm"
             pill
             color="primary"
-            onClick={() => router.push("/contacts")}
+            onClick={() => {
+              router.push("/contacts/new")
+            }}
           >
             {" "}
             Add Table Entry{" "}
