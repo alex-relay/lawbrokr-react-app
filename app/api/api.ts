@@ -98,4 +98,4 @@ const useGetBTCPriceWithInterval = (
   });
 };
 
-export { useGetBTCPriceWithInterval, useGetContactList };
+export { useGetBTCPriceWithInterval, useGetContactList, BASE_FAKER_URL, BASE_BINANCE_URL };

@@ -8,12 +8,11 @@ import PhoneSVG from "../../../public/phone.svg";
 import HomeSVG from "../../../public/home.svg";
 import BarchartSVG from "../../../public/bar-chart.svg";
 import LandingPageSVG from "../../../public/landing-pages.svg";
-import LightningSVG from "../../../public/lightning.svg"
-import CameraSVG from "../../../public/camera.svg"
-import LibrarySVG from "../../../public/library.svg"
-import SettingsSVG from "../../../public/settings.svg"
-import LawbrokrSVG from "../../../public/lawbrokr.svg"
-
+import LightningSVG from "../../../public/lightning.svg";
+import CameraSVG from "../../../public/camera.svg";
+import LibrarySVG from "../../../public/library.svg";
+import SettingsSVG from "../../../public/settings.svg";
+import LawbrokrSVG from "../../../public/lawbrokr.svg";
 
 import { createTheme, Avatar, ThemeProvider, Button } from "flowbite-react";
 
@@ -43,7 +42,7 @@ const NavigationBar = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <nav className="flex h-screen sticky top-0 w-52 max-w-52 flex-col justify-between rounded-xs bg-white px-4 pt-7 pb-10 shadow-2xl">
+      <nav className="sticky top-0 flex h-screen w-52 max-w-52 flex-col justify-between rounded-xs bg-white px-4 pt-7 pb-10 shadow-2xl" data-testid="lawbrokr-navbar">
         <div className="flex h-full flex-col justify-between gap-4">
           <div className="flex flex-col gap-20">
             <div className="flex-start flex items-center gap-2">
@@ -71,7 +70,11 @@ const NavigationBar = () => {
           <div>
             <div className="flex flex-col gap-5">
               <Button size="xs" color="primary" pill>
-                <Image src={LandingPageSVG} alt="landing-page for landing pages tab" /> Landing Pages
+                <Image
+                  src={LandingPageSVG}
+                  alt="landing-page for landing pages tab"
+                />{" "}
+                Landing Pages
               </Button>
               <Button size="xs" color="primary" pill>
                 <Image src={FunnelSVG} alt="funnel for funnel tab" />
@@ -79,15 +82,18 @@ const NavigationBar = () => {
               </Button>
               <Button size="xs" color="primary" pill>
                 {" "}
-                <Image src={LightningSVG} alt="automations for automations tab" />
+                <Image
+                  src={LightningSVG}
+                  alt="automations for automations tab"
+                />
                 Automations{" "}
               </Button>
               <Button size="xs" color="primary" pill>
-                <Image src={CameraSVG} alt="clips for clips tab"/>
+                <Image src={CameraSVG} alt="clips for clips tab" />
                 Clips
               </Button>
               <Button size="xs" color="primary" pill>
-                <Image src={LibrarySVG} alt="library for my library tab"/>
+                <Image src={LibrarySVG} alt="library for my library tab" />
                 My Library
               </Button>
               <Button size="xs" color="primary" pill>
@@ -95,7 +101,11 @@ const NavigationBar = () => {
                 Settings
               </Button>
               <div className="w-30 pl-3">
-                <Image src={LawbrokrSVG} alt="lawbrokr brand logo" />
+                <Image
+                  src={LawbrokrSVG}
+                  alt="lawbrokr brand logo"
+                  data-testid="lawbrokr-logo"
+                />
               </div>
             </div>
           </div>

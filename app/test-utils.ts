@@ -1,5 +1,6 @@
 const contactsList = [
   {
+    id: 1,
     company: "Jones, Rice and O'Reilly",
     country: "Swaziland",
     state: "Minnesota",
@@ -15,6 +16,7 @@ const contactsList = [
       "I ever was at the Gryphon as if he wasn't one?' Alice asked. 'We called him Tortoise because he taught us,' said the Gryphon as if she could have told you that.' 'If I'd been the right size to do.",
   },
   {
+    id: 2,
     company: "Carroll PLC",
     country: "Guinea-Bissau",
     state: "Michigan",
@@ -30,6 +32,7 @@ const contactsList = [
       "Alice's shoulder, and it said in an offended tone, and she looked down, was an uncomfortably sharp chin. However, she got to the garden with one finger, as he spoke, and then treading on her face.",
   },
   {
+    id: 3,
     company: "O'Keefe, Cormier and Friesen",
     country: "Suriname",
     state: "Wisconsin",
@@ -45,6 +48,8 @@ const contactsList = [
       "And mentioned me to him: She gave me a pair of white kid gloves while she remembered how small she was surprised to find herself talking familiarly with them, as if nothing had happened. 'How am I.",
   },
   {
+    id: 4,
+
     company: "Douglas Group",
     country: "Bahamas",
     state: "New Hampshire",
@@ -60,6 +65,8 @@ const contactsList = [
       "Little Bill It was the cat.) 'I hope they'll remember her saucer of milk at tea-time. Dinah my dear! I wish you wouldn't have come here.' Alice didn't think that there was enough of it at last, and.",
   },
   {
+    id: 5,
+
     company: "Stehr-Hickle",
     country: "Kenya",
     state: "Kentucky",
@@ -75,6 +82,7 @@ const contactsList = [
       "Alice,) and round the court and got behind Alice as it didn't much matter which way it was all finished, the Owl, as a drawing of a large crowd collected round it: there were no tears. 'If you're.",
   },
   {
+    id: 6,
     company: "Luettgen-Dach",
     country: "Switzerland",
     state: "Pennsylvania",
@@ -90,6 +98,7 @@ const contactsList = [
       "Alice, as she listened, or seemed to listen, the whole cause, and condemn you to sit down without being seen, when she looked up, and there they are!' said the Duchess: 'flamingoes and mustard both.",
   },
   {
+    id: 7,
     company: "Kuphal, Cassin and Hilpert",
     country: "Burkina Faso",
     state: "Nevada",
@@ -105,6 +114,7 @@ const contactsList = [
       "YOU?' Which brought them back again to the other: he came trotting along in a tone of great curiosity. 'Soles and eels, of course,' said the King. 'Nothing whatever,' said Alice. 'Why, SHE,' said.",
   },
   {
+    id: 8,
     company: "Runolfsdottir-Adams",
     country: "Malta",
     state: "Vermont",
@@ -120,6 +130,7 @@ const contactsList = [
       "The first question of course you know what to uglify is, you know. So you see, as well say,' added the Gryphon, and, taking Alice by the little dears came jumping merrily along hand in hand, in.",
   },
   {
+    id: 9,
     company: "Reinger, Durgan and Cole",
     country: "Afghanistan",
     state: "South Dakota",
@@ -135,6 +146,7 @@ const contactsList = [
       "Alice noticed, had powdered hair that WOULD always get into the court, arm-in-arm with the Lory, with a cart-horse, and expecting every moment to think to herself, 'whenever I eat or drink anything.",
   },
   {
+    id: 10,
     company: "Ratke Inc",
     country: "Italy",
     state: "Massachusetts",

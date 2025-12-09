@@ -22,7 +22,7 @@ import { ContactsFormInput } from "./types";
 import { Contact } from "../../api/api";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useContactsContext } from "@/app/ContactsContext";
+import { useContactsContext } from "../../ContactsContext";
 
 const GenericTextInputWithErrorMessage = ({
   field,
@@ -34,6 +34,7 @@ const GenericTextInputWithErrorMessage = ({
   placeholder?: string;
   color?: string;
   type?: string;
+  id?: string
 }) => (
   <div className={"h-20"}>
     <TextInput className="max-w-50" {...field} {...rest} />
@@ -53,7 +54,6 @@ const getExistingContact = (contacts: Contact[], data?: Contact) => {
         !["last-contacted", "notes"].includes(key) &&
         formValues.includes(value),
     );
-
     return commonalities.length >= 5;
   });
 
@@ -130,7 +130,7 @@ const ContactsForm = ({
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" data-testid="contacts-form">
       <h1 className="text-[var(--color-my-brand-primary)]">
         {" "}
         <b>Table Entry Form</b>{" "}
@@ -155,6 +155,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="company"
                     placeholder="e.g. Amazon"
                     color={errors.company ? "failure" : "white"}
                     errorMessage={errors.company?.message}
@@ -179,6 +180,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="country"
                     placeholder="e.g. USA"
                     color={errors.company ? "failure" : "white"}
                     errorMessage={errors.country?.message}
@@ -203,6 +205,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="state"
                     placeholder="e.g. California"
                     color={errors.state ? "failure" : "white"}
                     errorMessage={errors.state?.message}
@@ -238,6 +241,7 @@ const ContactsForm = ({
                         placeholder="e.g. 43"
                         inputMode="numeric"
                         value={field.value ?? ""}
+                        id="employees"
                         onChange={(event) => {
                           const val = event.target.value;
                           if (isNaN(Number(val))) {
@@ -280,6 +284,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="zipCode"
                     placeholder="e.g. 20016"
                     color={errors.zipCode ? "failure" : "white"}
                     errorMessage={errors.zipCode?.message}
@@ -308,6 +313,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="website"
                     placeholder="e.g. https://www.cbc.ca"
                     color={errors.website ? "failure" : "white"}
                     errorMessage={errors.website?.message}
@@ -339,6 +345,7 @@ const ContactsForm = ({
                   <GenericTextInputWithErrorMessage
                     field={field}
                     type="text"
+                    id="salesRep"
                     placeholder="e.g. Linda"
                     color={errors.salesRep ? "failure" : "white"}
                     errorMessage={errors.salesRep?.message}
@@ -372,6 +379,7 @@ const ContactsForm = ({
                         color={errors.revenue ? "failure" : "white"}
                         placeholder="e.g. 43"
                         inputMode="numeric"
+                        id="revenue"
                         value={field.value ?? ""}
                         onChange={(event) => {
                           const val = event.target.value;
@@ -409,6 +417,7 @@ const ContactsForm = ({
                 render={({ field }) => (
                   <GenericTextInputWithErrorMessage
                     field={field}
+                    id="city"
                     placeholder="e.g. Los Angeles"
                     color={errors.city ? "failure" : "white"}
                     errorMessage={errors.city?.message}
@@ -437,6 +446,7 @@ const ContactsForm = ({
                         field.value instanceof Date ? field.value : undefined
                       }
                       color="white"
+                      id="lastContacted"
                       onChange={(date: Date | null) =>
                         field.onChange(date?.toLocaleDateString("en-CA"))
                       }

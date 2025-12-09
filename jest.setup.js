@@ -10,7 +10,6 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 global.ReadableStream = ReadableStream;
 global.TransformStream = TransformStream;
-// 2. Expose it to the global scope
 global.WritableStream = WritableStream;
 global.BroadcastChannel = BroadcastChannel;
 global.ResizeObserver = class {
