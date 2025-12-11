@@ -5,6 +5,7 @@ import { ModuleRegistry, AllCommunityModule } from "ag-grid-community";
 import "./globals.css";
 import Providers from "./providers";
 import AgGridRegistry from "./components/AGGridRegistry";
+import NavigationBar from "./components/navigation/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,10 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <ThemeInit />
-          {children}
+          <div className="flex">
+            <NavigationBar />
+            {children}
+          </div>
         </body>
       </Providers>
     </html>

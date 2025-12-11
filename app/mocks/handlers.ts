@@ -7,7 +7,7 @@ import {
 } from "app/test-utils";
 
 export const handlers = [
-  http.get(`${BASE_FAKER_URL}/custom`, ({ request }) => {
+  http.get(`${BASE_FAKER_URL}/custom`, () => {
     return HttpResponse.json({
       data: contactsList,
     });

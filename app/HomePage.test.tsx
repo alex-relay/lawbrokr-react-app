@@ -26,7 +26,7 @@ jest.mock("react-apexcharts", () => ({
 }));
 
 const contactsListWithoutId = Object.fromEntries(
-  Object.entries(contactsList[0]).filter(([key, value]) => key !== "id"),
+  Object.entries(contactsList[0]).filter(([key, ]) => key !== "id"),
 );
 
 const tableHeaders = Object.keys(contactsListWithoutId).map(
@@ -84,23 +84,5 @@ describe("Home page", () => {
     expect(await screen.findByText("Bitcoin Price and Volatility Charts"));
 
     expect(await screen.findAllByTestId("mock-apexchart")).toHaveLength(2);
-  });
-
-  it("renders the nav bar with links and user info", async () => {
-    renderHomePage();
-
-    const navBar = await screen.findByTestId("lawbrokr-navbar");
-
-    expect(await screen.findByTestId("lawbrokr-logo"));
-    expect(within(navBar).getByText("Landing Pages")).toBeInTheDocument();
-    expect(within(navBar).getByText("Analytics")).toBeInTheDocument();
-    expect(within(navBar).getByText("Funnel")).toBeInTheDocument();
-    expect(within(navBar).getByText("Automations")).toBeInTheDocument();
-    expect(within(navBar).getByText("Clips")).toBeInTheDocument();
-    expect(within(navBar).getByText("Landing Pages")).toBeInTheDocument();
-    expect(within(navBar).getByText("My Library")).toBeInTheDocument();
-    expect(within(navBar).getByText("Settings")).toBeInTheDocument();
-    expect(within(navBar).getByText("Home")).toBeInTheDocument();
-    expect(within(navBar).getByText("Responses")).toBeInTheDocument();
   });
 });

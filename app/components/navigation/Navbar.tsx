@@ -1,6 +1,5 @@
 "use client";
 
-import { FaHouse } from "react-icons/fa6";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Image from "next/image";
 import FunnelSVG from "../../../public/funnels.svg";
@@ -42,7 +41,10 @@ const NavigationBar = () => {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <nav className="sticky top-0 flex h-screen w-52 max-w-52 flex-col justify-between rounded-xs bg-white px-4 pt-7 pb-10 shadow-2xl" data-testid="lawbrokr-navbar">
+      <nav
+        className="sticky top-0 flex h-screen w-52 max-w-52 flex-col justify-between rounded-xs bg-white px-4 pt-7 pb-10 shadow-2xl"
+        data-testid="lawbrokr-navbar"
+      >
         <div className="flex h-full flex-col justify-between gap-4">
           <div className="flex flex-col gap-20">
             <div className="flex-start flex items-center gap-2">
